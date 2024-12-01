@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://b1cfabcpdg7qo"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://co35jhdq8eebk" path="res://Entities/Player/player_physics_material.tres" id="1_7y1l7"]
+[ext_resource type="Script" path="res://Entities/Player/player.gd" id="1_oeadr"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_t3vhd"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_n0adr"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0h07q"]
+height = 0.5
+radius = 0.6
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_pl0fa"]
+height = 0.2
+radius = 0.4
+
+[node name="Player" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+mass = 8.6
+physics_material_override = ExtResource("1_7y1l7")
+script = ExtResource("1_oeadr")
+physics_mat = ExtResource("1_7y1l7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_t3vhd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_n0adr")
+
+[node name="Head" type="Node3D" parent="."]
+
+[node name="Camera" type="Camera3D" parent="Head"]
+current = true
+
+[node name="Wall_cast" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_0h07q")
+
+[node name="Ground_cast" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0523582, 0)
+shape = SubResource("CylinderShape3D_pl0fa")
+
+[node name="Dash_timer" type="Timer" parent="."]

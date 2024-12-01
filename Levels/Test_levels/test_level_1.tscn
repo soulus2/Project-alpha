@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://cckimyqf58aw8"]
+
+[ext_resource type="PackedScene" uid="uid://efanudbjcwir" path="res://Levels/Test_levels/test_level_1-m.tscn" id="1_ujh3m"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a83nk"]
+
+[sub_resource type="Sky" id="Sky_gej8o"]
+sky_material = SubResource("ProceduralSkyMaterial_a83nk")
+
+[sub_resource type="Environment" id="Environment_b6ihi"]
+background_mode = 2
+sky = SubResource("Sky_gej8o")
+
+[node name="Test_level_1" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 21.6602, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_b6ihi")
+
+[node name="test_level_2" parent="." instance=ExtResource("1_ujh3m")]

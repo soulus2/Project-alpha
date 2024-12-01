@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cckimyqf58aw8"]
+[gd_scene load_steps=9 format=3 uid="uid://cckimyqf58aw8"]
 
 [ext_resource type="PackedScene" uid="uid://efanudbjcwir" path="res://Levels/Test_levels/test_level_1-m.tscn" id="1_ujh3m"]
+[ext_resource type="Script" path="res://Levels/Test_levels/hurt_bodx.gd" id="2_sscva"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a83nk"]
 
@@ -10,6 +11,19 @@ sky_material = SubResource("ProceduralSkyMaterial_a83nk")
 [sub_resource type="Environment" id="Environment_b6ihi"]
 background_mode = 2
 sky = SubResource("Sky_gej8o")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bq5ur"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_07ksq"]
+cull_mode = 2
+albedo_color = Color(1, 0, 0, 1)
+proximity_fade_distance = 5.0
+distance_fade_mode = 3
+
+[sub_resource type="BoxMesh" id="BoxMesh_csuw3"]
+material = SubResource("StandardMaterial3D_07ksq")
+size = Vector3(2, 2, 2)
 
 [node name="Test_level_1" type="Node3D"]
 
@@ -21,3 +35,15 @@ shadow_enabled = true
 environment = SubResource("Environment_b6ihi")
 
 [node name="test_level_2" parent="." instance=ExtResource("1_ujh3m")]
+
+[node name="Hurt_box" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("2_sscva")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurt_box"]
+shape = SubResource("BoxShape3D_bq5ur")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Hurt_box"]
+mesh = SubResource("BoxMesh_csuw3")
+
+[connection signal="body_entered" from="Hurt_box" to="Hurt_box" method="_on_body_entered"]

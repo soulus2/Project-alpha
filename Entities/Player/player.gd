@@ -1,5 +1,8 @@
 extends RigidBody3D
 
+@export_category("Vitals")
+@export var max_health:int = 10
+
 @export_category("Vertical movement")
 @export var jump_velocity:float = 10
 @export var drop_velocity:float = 10
@@ -45,7 +48,7 @@ var previous_position:Vector3 = Vector3.ZERO
 var wall_jumps:int = max_wall_jumps
 var air_time:int = 0
 var dashes:int = max_dashes
-
+var health:int = max_health
 var friction:float = physics_mat.friction
 var current_speed:float = 0
 
@@ -54,7 +57,15 @@ func _ready():
 	linear_damp = 1.0
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 func _process(delta: float) -> void:
-	#pass
+	
+	# Handle joystick input
+	
+	var look_dir = Input.get_vector("look_left","look_right","look_up","look_down")
+	camera.rotation_degrees.x -= look_dir.y * joy_view_sensitivity.x *2 * get_physics_process_delta_time()
+	camera.rotation_degrees.x = clamp(camera.rotation_degrees.x,-89,89)
+	head.rotation_degrees.y -= look_dir.x * joy_view_sensitivity.y *2 * get_physics_process_delta_time()
+	mouse_input = Vector2.ZERO
+	
 	if dashes < max_dashes:
 		dash_timer.start()
 	elif !dash_timer.is_stopped(): 
@@ -146,19 +157,7 @@ func _input(event):
 		camera.rotation_degrees.x = clamp(camera.rotation_degrees.x,-89,89)
 		head.rotation_degrees.y -= event.relative.x * view_sensitivity.y * get_physics_process_delta_time()
 		mouse_input = Vector2.ZERO
-	#if event is InputEventJoypadMotion:
-		#var look_dir = Input.get_vector("look_left","look_right","look_up","look_down")
-		#camera.rotation_degrees.x -= look_dir.y * joy_view_sensitivity.x *2 * get_physics_process_delta_time()
-		#camera.rotation_degrees.x = clamp(camera.rotation_degrees.x,-89,89)
-		#head.rotation_degrees.y -= look_dir.x * joy_view_sensitivity.y *2 * get_physics_process_delta_time()
-		#mouse_input = Vector2.ZERO
-
-#func Look_with_controller():
-	#var look_dir = Input.get_vector("look_left","look_right","look_up","look_down")
-	#camera.rotation_degrees.x -= look_dir.y * joy_view_sensitivity.x *2 * get_physics_process_delta_time()
-	#camera.rotation_degrees.x = clamp(camera.rotation_degrees.x,-89,89)
-	#head.rotation_degrees.y -= look_dir.x * joy_view_sensitivity.y *2 * get_physics_process_delta_time()
-	#mouse_input = Vector2.ZERO
+		
 	
 func get_normal_slide_V3(a:Vector3,b:Vector3):
 	return a-(a.dot(b))*b
@@ -175,7 +174,11 @@ func get_wall_jumps():
 	return wall_jumps
 func get_dashes():
 	return dashes
-
-
+func get_max_health() -> int:
+	return max_health
+func get_health() -> int:
+	return health
+func damage(value):
+	health-=value
 func _on_dash_timer_timeout() -> void:
 	dashes+=1

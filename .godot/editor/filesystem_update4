@@ -5,3 +5,6 @@ res://Entities/Player/player.tscn
 res://Levels/Test_levels/test_level_1.tscn
 res://Levels/Test_levels/test_level_1-m.tscn
 res://Entities/Player/player.gd
+res://Entities/Player/player.tres
+res://Entities/Player/hud.gd
+res://Levels/Test_levels/hurt_bodx.gd

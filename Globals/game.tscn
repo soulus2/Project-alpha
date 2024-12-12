@@ -1,11 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://cm086v83gnjpy"]
+[gd_scene load_steps=5 format=3 uid="uid://cm086v83gnjpy"]
 
 [ext_resource type="Script" path="res://Globals/game.gd" id="1_raued"]
 [ext_resource type="PackedScene" uid="uid://b1cfabcpdg7qo" path="res://Entities/Player/player.tscn" id="1_v6nyk"]
 [ext_resource type="PackedScene" uid="uid://cckimyqf58aw8" path="res://Levels/Test_levels/test_level_1.tscn" id="2_mspr0"]
+[ext_resource type="PackedScene" uid="uid://bdh0gj4dt771g" path="res://UI/main_menu.tscn" id="2_n7ob5"]
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_raued")
+
+[node name="Main_menu" parent="." instance=ExtResource("2_n7ob5")]
 
 [node name="World" type="Node3D" parent="."]
 

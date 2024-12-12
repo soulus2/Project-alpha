@@ -1,12 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://b1cfabcpdg7qo"]
+[gd_scene load_steps=11 format=3 uid="uid://b1cfabcpdg7qo"]
 
 [ext_resource type="PhysicsMaterial" uid="uid://co35jhdq8eebk" path="res://Entities/Player/player_physics_material.tres" id="1_7y1l7"]
 [ext_resource type="Script" path="res://Entities/Player/player.gd" id="1_oeadr"]
-[ext_resource type="Texture2D" uid="uid://pyuamdop5npj" path="res://Assets/UI/Bar_left_under.svg" id="3_sglwt"]
+[ext_resource type="Texture2D" path="res://Assets/UI/Bar_left_under.svg" id="3_sglwt"]
 [ext_resource type="Script" path="res://Entities/Player/hud.gd" id="3_srmq6"]
-[ext_resource type="Texture2D" uid="uid://6ygmaqi3noc" path="res://Assets/UI/Bar_left_over.svg" id="4_ia4dw"]
-[ext_resource type="Texture2D" uid="uid://boq7rcx4cn2jr" path="res://Assets/UI/Bar_left_progres.svg" id="5_rr5sc"]
-[ext_resource type="Texture2D" uid="uid://ble866pqylft2" path="res://Assets/UI/Screenshot 2024-12-01 224401.png" id="6_qyg1l"]
+[ext_resource type="Texture2D" path="res://Assets/UI/Bar_left_over.svg" id="4_ia4dw"]
+[ext_resource type="Texture2D" path="res://Assets/UI/Bar_left_progres.svg" id="5_rr5sc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_t3vhd"]
 
@@ -42,6 +41,7 @@ mesh = SubResource("CapsuleMesh_n0adr")
 current = true
 
 [node name="HUD" type="Control" parent="Head/Camera"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
@@ -71,7 +71,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0523582, 0)
 shape = SubResource("CylinderShape3D_pl0fa")
 
 [node name="Dash_timer" type="Timer" parent="."]
-
-[node name="Screenshot2024-12-01224401" type="Sprite2D" parent="."]
-position = Vector2(254, -176)
-texture = ExtResource("6_qyg1l")

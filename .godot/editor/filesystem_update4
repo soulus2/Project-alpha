@@ -1,10 +1,9 @@
-res://Globals/game.tscn
-res://Levels/Test_levels/test_level_1-m.tres
-res://Globals/game.gd
 res://Entities/Player/player.tscn
+res://Levels/Test_levels/test_level_1-m.tres
+res://Entities/Player/player.tres
+res://Globals/game.tscn
 res://Levels/Test_levels/test_level_1.tscn
 res://Levels/Test_levels/test_level_1-m.tscn
-res://Entities/Player/player.gd
-res://Entities/Player/player.tres
-res://Entities/Player/hud.gd
-res://Levels/Test_levels/hurt_bodx.gd
+res://UI/main_menu.tscn
+res://UI/main_menu.gd
+res://Assets/UI/Themes/main_theme.tres
